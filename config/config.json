@@ -1,0 +1,252 @@
+{
+    "last_update" : "",
+    "local_database": {
+        "name": "UDOFF",
+        "user": {
+            "name": "udoff_user",
+            "password": "udoff_pwd"
+        }
+    },
+    "category_list_request" : "https://fr.openfoodfacts.org/categories.json",
+    "products_request" : {
+        "base_request" : "https://fr.openfoodfacts.org/cgi/search.pl",
+        "parameters" : {
+                "search_terms": "categories.products.search_terms",
+                "search_simple": "1",
+                "action": "process",
+                "tagtype_0": "categories",
+                "tag_contains_0": "contains",
+                "tag_0": "categories.name",
+                "tagtype_1": "nutrition_grades",
+                "tag_contains_1": "contains",
+                "tag_1": "categories.products.nutrition_grade",
+                "sort_by": "unique_scans_n",
+                "page_size": "20",
+                "json": "1"
+        },
+        "products_by_categories" : [
+            {
+                "name" : "Boissons gazeuses",
+                "products" : [
+                    {
+                        "search_terms" : "Ice tea peche - Lipton",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Coca-Cola",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Orangina",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Mega Monster Energy",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Dr pepper",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Red Bull sans sucre",
+                        "nutrition_grade" : "b"
+                    },
+                    {
+                        "search_terms" : "San Pellegrino",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Perrier",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Badoit citron",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Petillante saveur Citron - Soguaro",
+                        "nutrition_grade" : "a"
+                    }
+                ]
+            },
+            {
+                "name" : "Pates à tartiner",
+                "products" : [
+                    {
+                        "search_terms" : "Nutella",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Reese's Spreads Peanut Butter Chocolate",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Ovomaltine Crunchy",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Creme De Caramel Au Beurre Sale",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Nesquik Tartine",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Pate à Tartiner - So Tasty",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Pate à tartiner - Gerble",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Puree de chataigne d'Ardeche",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Le Caramelier",
+                        "nutrition_grade" : "b"
+                    }    
+                ]
+            },
+            {
+                "name" : "Chips",
+                "products" : [
+                    {
+                        "search_terms" : "Tuiles salees Pringles",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Zweifel",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Poulet Braise - Brets",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Gout Paprika - Doritos",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Tyrrells",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Chips au sel de mer et au vinaigre - Marks Spencer",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Chips sans sel - Aperi Bio",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Chips naturel - TerraSana",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Chips nature - Belle France",
+                        "nutrition_grade" : "b"
+                    },
+                    {
+                        "search_terms" : "Lightly Sea Salted - Tyrrells",
+                        "nutrition_grade" : "b"
+                    }
+                ]
+            },
+            {
+                "name" : "Desserts glaces",
+                "products" : [
+                    {
+                        "search_terms" : "Haagen-Dazs - Vanilla Pecan",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Magnum Double Caramel",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Snickers Ice Cream",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Ben Jerry's",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Cones chocolat noisettes - Milka",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Glaces chocolat vanille Cars",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Sorbet Le cacao - Picard",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Sorbet citron - U",
+                        "nutrition_grade" : "b"
+                    },
+                    {
+                        "search_terms" : "Sorbet Cassis Avec Baies De Cassis - U",
+                        "nutrition_grade" : "b"
+                    },
+                    {
+                        "search_terms" : "La Laitiere",
+                        "nutrition_grade" : "b"
+                    }
+                ]
+            },
+            {
+                "name" : "Pizzas tartes salees et quiches",
+                "products" : [
+                    {
+                        "search_terms" : "Quiche Lorraine Casino",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Pizza Jambon Fromage - Casa Morando",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Tarte au Maroilles - Fauquet",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Flammekueche - Casino",
+                        "nutrition_grade" : "e"
+                    },
+                    {
+                        "search_terms" : "Ristorante Pizza Quattro Formaggi - Dr Oetker",
+                        "nutrition_grade" : "d"
+                    },
+                    {
+                        "search_terms" : "Pizza Bolognaise - Turini",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Pizza Legumes - Casino Bio",
+                        "nutrition_grade" : "b"
+                    },
+                    {
+                        "search_terms" : "Pizza royale - Auchan",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "Pizza a Pate fine Poulet et Legumes Grilles - Casino",
+                        "nutrition_grade" : "a"
+                    },
+                    {
+                        "search_terms" : "La vegetariana - La Gastronomia Di Angelo",
+                        "nutrition_grade" : "a"
+                    }
+                ]
+            }
+        ]
+    }
+    
+}
