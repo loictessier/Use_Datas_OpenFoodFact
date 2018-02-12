@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-"""DOCSTRING
+""" Updater.py will be used as a script to initialise
+    the database with datas that will be used by
+    the application. To be functionnal it has
+    prerequisites : a valid user granted with right on
+    the local mysql database used for this application.
+    These informations must match the config.json file
+    (see local_database). You can also adapt the
+    sample of categories requested for products in the
+    API to your needs by editing the config.json file.
 """
 
 from os import path
@@ -16,7 +24,9 @@ log.basicConfig(level=log.CRITICAL)
 
 
 class Updater:
-    """ DOCSTRING
+    """ This class will be used at the launch
+        of the application to create the database
+        and fill it with datas.
     """
 
     def __init__(self):
@@ -36,16 +46,17 @@ class Updater:
         self.update()
 
     def update(self):
-        '''DOCSTRING
+        ''' Call internal methods
         '''
-        self.initialize_database()
+        self._initialize_database()
         self._get_categories_datas()
         self._get_products_datas()
         self._insert_datas_to_db()
 
     def _read_config_json(self, filename):
-        """ Read the config file and extract the requests
-            and parameters associated
+        """ Read the config file and extract the informations
+            we need to connect to the database and interact with
+            the API
         """
         # Open the config file and read data
         directory = path.dirname(path.dirname(__file__))
@@ -65,8 +76,9 @@ class Updater:
         self.db_infos = data['local_database']
         self.min_prod_per_cat = data['min_prod_per_cat']
 
-    def initialize_database(self):
-        '''DOCSTRING
+    def _initialize_database(self):
+        ''' Check if database structure already
+            exist on localhost, if not it creates it.
         '''
         db = records.Database(
             'mysql+pymysql://{username}:{password}@localhost'.format(
@@ -130,7 +142,8 @@ class Updater:
                 count = self._process_product_requests(payload, 'b')
 
     def _process_product_requests(self, r_payload, nutrition_grade):
-        '''DOCSTRING
+        ''' Analyze and sort product data obtained
+            with the input parameters
         '''
         cpt_new_products = 0
         r_payload['tag_1'] = nutrition_grade
@@ -171,6 +184,8 @@ class Updater:
         return product
 
     def _insert_datas_to_db(self):
+        ''' Insert datas to the database
+        '''
         # Connect to database
         db = records.Database(
             'mysql+pymysql://{name}:{pwd}@localhost/{db}?{cset}'.format(
