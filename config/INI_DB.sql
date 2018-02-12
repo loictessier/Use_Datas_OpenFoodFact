@@ -6,18 +6,21 @@ USE UDOFF;
     -- TABLE : Product
     CREATE TABLE Product (
         id INT UNSIGNED AUTO_INCREMENT,
-        product_name VARCHAR(200) NOT NULL,
+        product_name VARCHAR(200) NOT NULL UNIQUE,
         ingredients TEXT,
         stores TEXT,
         product_url VARCHAR(2100),
         nutriscore CHAR(1),
+        popularity_score INT UNSIGNED,
         PRIMARY KEY(id)
     )ENGINE=INNODB;
 
     -- TABLE : Category
     CREATE TABLE Category (
         id INT UNSIGNED AUTO_INCREMENT,
-        category_name VARCHAR(150) NOT NULL UNIQUE,
+        category_name VARCHAR(150) NOT NULL,
+        category_id_off VARCHAR(150) NOT NULL,
+        UNIQUE(category_name, category_id_off),
         PRIMARY KEY(id)
     )ENGINE=INNODB;
 
@@ -30,10 +33,12 @@ USE UDOFF;
 
     -- TABLE : Record
     CREATE TABLE Record (
+        id INT UNSIGNED AUTO_INCREMENT,
         search_date DATETIME NOT NULL,
-        id_product_start INT UNSIGNED,
-        id_substitute INT UNSIGNED,
-        PRIMARY KEY(id_product_start, id_substitute)
+        product_start_name INT UNSIGNED,
+        substitute_name INT UNSIGNED,
+        url_substitute VARCHAR(2100),
+        PRIMARY KEY(id)
     )ENGINE=INNODB;
 
 -- CREATE ADDITIONNALS INDEXES
@@ -59,11 +64,3 @@ USE UDOFF;
     -- foreign key Product_Category : id_category
     ALTER TABLE Product_Category
     ADD CONSTRAINT fk_prod_cat_id_category FOREIGN KEY (id_category) REFERENCES Category(id);
-
-    -- foreign key Record : id_product_start
-    ALTER TABLE Record
-    ADD CONSTRAINT fk_Record_id_product_start FOREIGN KEY (id_product_start) REFERENCES Product(id);
-
-    -- foreign key Record : id_substitute
-    ALTER TABLE Record
-    ADD CONSTRAINT fk_Record_id_substitute FOREIGN KEY (id_substitute) REFERENCES Product(id);
