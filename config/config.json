@@ -1,0 +1,45 @@
+{
+    "last_update" : "",
+    "local_database": {
+        "name": "UDOFF",
+        "user": {
+            "name": "udoff_user",
+            "password": "udoff_pwd"
+        }
+    },
+    "category_list_request" : "https://fr.openfoodfacts.org/categories.json",
+    "min_prod_per_cat": 40,
+    "products_request" : {
+        "base_request" : "https://fr.openfoodfacts.org/cgi/search.pl",
+        "parameters" : {
+                "search_simple": "1",
+                "action": "process",
+                "tagtype_0": "categories",
+                "tag_contains_0": "contains",
+                "tag_0": "",
+                "tagtype_1": "nutrition_grades",
+                "tag_contains_1": "contains",
+                "tag_1": "",
+                "sort_by": "unique_scans_n",
+                "page_size": "250",
+                "json": "1"
+        },
+        "categories" : [
+            {
+                "name" : "Boissons gazeuses"
+            },
+            {
+                "name" : "Pates à tartiner"
+            },
+            {
+                "name" : "Chips"
+            },
+            {
+                "name" : "Desserts glaces"
+            },
+            {
+                "name" : "Pizzas tartes salees et quiches"
+            }
+        ]
+    }
+}
