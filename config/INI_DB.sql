@@ -31,21 +31,21 @@ USE UDOFF;
         PRIMARY KEY(id_product, id_category)
     )ENGINE=INNODB;
 
-    -- TABLE : Record
-    CREATE TABLE Record (
+    -- TABLE : Search_history
+    CREATE TABLE Search_history (
         id INT UNSIGNED AUTO_INCREMENT,
         search_date DATETIME NOT NULL,
-        product_start_name INT UNSIGNED,
-        substitute_name INT UNSIGNED,
+        search_product_name VARCHAR(200) NOT NULL,
+        substitute_name VARCHAR(200) NOT NULL,
         url_substitute VARCHAR(2100),
         PRIMARY KEY(id)
     )ENGINE=INNODB;
 
 -- CREATE ADDITIONNALS INDEXES
 
-    -- index Record : search_date
-    ALTER TABLE Record
-    ADD INDEX ind_record_search_date (search_date);
+    -- index Search_history : search_date
+    ALTER TABLE Search_history
+    ADD INDEX ind_History_search_date (search_date);
 
     -- index Category : category_name
     ALTER TABLE Category
