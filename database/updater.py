@@ -91,7 +91,7 @@ class Updater:
         if not rows.first().db_exist:
             # Open and read the file
             directory = path.dirname(path.dirname(__file__))
-            fd = open(path.join(directory, "config", 'INI_DB.sql'), 'r')
+            fd = open(path.join(directory, "database", 'INI_DB.sql'), 'r')
             sql_file = fd.read()
             fd.close()
 
@@ -115,7 +115,6 @@ class Updater:
         for my_dict in data['tags']:
             # only retrieve category with name not having ':' in it
             if ":" not in my_dict['name'] \
-                    and "?" not in my_dict['name'] \
                     and len(my_dict['name']) < 150:
                 category = {
                     "name": my_dict['name'],
@@ -235,9 +234,9 @@ class Updater:
                     id_cat = db.query(
                         "SELECT id \
                         FROM Category \
-                        WHERE category_name = '{cat}' \
-                        OR category_id_off = '{cat}'".format(
-                            cat=c.replace("'", "''"))).first()
+                        WHERE category_name = :cat \
+                        OR category_id_off = :cat",
+                        cat=c).first()
                     db.query(
                         "INSERT INTO Product_Category (id_product, id_category) \
                         VALUES(:id_product, :id_category)",
