@@ -67,7 +67,7 @@ class Model:
             "INNER JOIN Product_Category as Pc ON P.id = Pc.id_product "
             "WHERE Pc.id_category = :id_cat "
             "AND P.nutriscore in ('e', 'd') "
-            "ORDER BY P.nutriscore DESC, P.popularity_score DESC "
+            "ORDER BY P.popularity_score DESC, P.nutriscore DESC "
             "LIMIT 40",
             id_cat=id_category)
         return ast.literal_eval(rows.export('json'))
@@ -147,7 +147,8 @@ class Model:
             in Search_history
         '''
         rows = self.db.query(
-            "SELECT search_date, "
+            "SELECT "
+            "   DATE_FORMAT(search_date, '%d/%m/%Y - %H:%i') AS search_date, "
             "   search_product_name, "
             "   substitute_name, "
             "   url_substitute "
