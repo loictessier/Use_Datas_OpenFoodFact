@@ -36,14 +36,13 @@ class Updater:
         self.product_base_params = dict()
         self.cat_vars = list()
         self.min_prod_per_cat = 0
-        # Data from API 
+        # Data from API
         self.categories = list()
         self.products = list()
         # Database connection informations
         self.db_infos = dict()
         # Methods
         self._read_config_json('config.json')
-        self.update()
 
     def update(self):
         ''' Call internal methods
@@ -82,7 +81,7 @@ class Updater:
         '''
         db = records.Database(
             'mysql+pymysql://{username}:{password}@localhost'.format(
-                username=self.db_infos['user']['name'], 
+                username=self.db_infos['user']['name'],
                 password=self.db_infos['user']['password']))
 
         rows = db.query("SELECT count(SCHEMA_NAME) AS db_exist \
@@ -156,7 +155,7 @@ class Updater:
                     if not any(
                             p['product_name'].upper() ==
                             item['product_name'].upper() or
-                            [i for i in p['brands'].split(",") 
+                            [i for i in p['brands'].split(",")
                                 if i in item['brands'].split(",")]
                             for p in self.products):
                         self.products.append(item)
