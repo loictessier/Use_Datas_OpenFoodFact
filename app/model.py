@@ -1,29 +1,35 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+""" The model handles all the calls and communication
+    with the database
+"""
+
 from os import path
 import logging as log
 import json
-import records
 import ast
+import records
 
 # log.basicConfig(level=log.DEBUG)
 log.basicConfig(level=log.CRITICAL)
 
 
 class Model:
-    ''' DOCSTRING
+    ''' This class handles all the request usefull
+        to the application to get or save datas from
+        the database
     '''
 
     def __init__(self):
         self.db_infos = dict()
         self._read_config_json('config.json')
-        self.db = records.Database(
+        self.database = records.Database(
             'mysql+pymysql://{name}:{pwd}@localhost/{db}?{cset}'.format(
-                    name=self.db_infos['user']['name'],
-                    pwd=self.db_infos['user']['password'],
-                    db=self.db_infos['name'],
-                    cset='charset=utf8mb4'))
+                name=self.db_infos['user']['name'],
+                pwd=self.db_infos['user']['password'],
+                db=self.db_infos['name'],
+                cset='charset=utf8mb4'))
 
     def _read_config_json(self, filename):
         """ Read the config file and extract the informations
@@ -36,7 +42,7 @@ class Model:
             with open(path_to_file) as json_data:
                 data = json.load(json_data)
         except FileNotFoundError as err:
-            log.critical('Error: %s' % err)
+            log.critical('Error: %s', err)
         # extract database informations
         self.db_infos = data['local_database']
 
@@ -44,7 +50,7 @@ class Model:
         ''' Get the most populated categories
             from database and returns them
         '''
-        rows = self.db.query(
+        rows = self.database.query(
             "SELECT Cat.id as Id, cat.category_name as Name "
             "FROM Category AS Cat "
             "INNER JOIN Product_Category AS Pc ON Cat.id = Pc.id_category "
@@ -58,7 +64,7 @@ class Model:
             category passed as parameter with
             bad nutrition grade (e or d)
         '''
-        rows = self.db.query(
+        rows = self.database.query(
             "SELECT P.id as Id, "
             "P.product_name as Name, "
             "P.popularity_score as Popularity_score, "
@@ -76,7 +82,7 @@ class Model:
         ''' Get the most accurate healthy substitutes for
             a given search_product and a category.
         '''
-        rows = self.db.query(
+        rows = self.database.query(
             "SELECT "
             "    P.id as Id, "
             "    P.product_name as Name, "
@@ -92,7 +98,8 @@ class Model:
             "AND PC.id_category = :cat_id "
             "AND PC3.id_product = :p_id "
             "GROUP BY P.id, P.product_name, P.nutriscore "
-            "ORDER BY P.nutriscore ASC, COUNT(PC2.id_category) DESC ",
+            "ORDER BY P.nutriscore ASC, COUNT(PC2.id_category) DESC "
+            "LIMIT 5 ",
             cat_id=id_category,
             p_id=id_search_product)
         return ast.literal_eval(rows.export('json'))
@@ -101,7 +108,7 @@ class Model:
         ''' Get detailled informations of one product
             passed as parameter
         '''
-        rows = self.db.query(
+        rows = self.database.query(
             "SELECT * "
             "FROM Product "
             "WHERE id = :id_p",
@@ -114,20 +121,20 @@ class Model:
             of the database (based on search_product and chosen
             substitute passed as parameters)
         '''
-        search_product = self.db.query(
+        search_product = self.database.query(
             "SELECT product_name "
             "FROM Product "
             "WHERE id = :id_p",
             id_p=id_search_product).first()
 
-        substitute_product = self.db.query(
+        substitute_product = self.database.query(
             "SELECT product_name, "
             "   product_url "
             "FROM Product "
             "WHERE id = :id_p",
             id_p=id_substitute).first()
 
-        self.db.query(
+        self.database.query(
             "INSERT INTO Search_history ( \
                 search_date, \
                 search_product_name, \
@@ -146,7 +153,7 @@ class Model:
         ''' Get the list of all search results saved
             in Search_history
         '''
-        rows = self.db.query(
+        rows = self.database.query(
             "SELECT "
             "   DATE_FORMAT(search_date, '%d/%m/%Y - %H:%i') AS search_date, "
             "   search_product_name, "
