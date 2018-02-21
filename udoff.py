@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-""" DOCSTRING
+""" Starting point of the application
+    use_data_open_food_fact (udoff)
 """
 
 from os import path
