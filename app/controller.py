@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-""" DOCSTRING
+""" This module implements the logic of the differents
+    user-case, it makes the calls to the model and the
+    displayer.
 """
 
 import logging as log
-from . import Displayer as di
-from . import Model as mo
+from . import displayer as di
+from . import model as mo
 
 # log.basicConfig(level=log.DEBUG)
 log.basicConfig(level=log.CRITICAL)
 
 
 class Controller:
-    """ DOCSTRING
+    """ This class contains the core of the logic
+        of the application, it is directly implemented
+        by the starting point of the application
     """
 
     def __init__(self):
@@ -21,17 +25,20 @@ class Controller:
         self.my_model = mo.Model()
 
     def start(self):
+        """ Launch the main menu of the application,
+            starting point of the differents scenarios
+        """
         while True:
-            r = self.my_displayer.main_menu()
-            if r == 1:
-                self._search_worflow()
-            elif r == 2:
-                self._history_workflow()
-            elif r == 3:
+            response = self.my_displayer.main_menu()
+            if response == 1:
+                self.search_worflow()
+            elif response == 2:
+                self.history_workflow()
+            elif response == 3:
                 self.my_displayer.quit_display()
                 return True
 
-    def _search_worflow(self):
+    def search_worflow(self):
         """ start the workflow of searching a substitute :
                 1) Select a category
                 2) Select a product to remplace
@@ -80,7 +87,7 @@ class Controller:
             elif i == 2:
                 return True
 
-    def _history_workflow(self):
+    def history_workflow(self):
         """ Start the workflow of consulting the history:
                 1) Display the history of saved searches
         """
